@@ -1,0 +1,179 @@
+enum UserRole {
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum PaymentStatus {
+  OUTSTANDING
+  PAID
+  OVERDUE
+}
+
+enum InvoiceStatus {
+  DRAFT
+  CONFIRMED
+  PAID
+}
+
+enum DiscountType {
+  FIXED
+  PERCENTAGE
+}
+
+enum DiscountStatus {
+  ACTIVE
+  EXPIRED
+  DEPLETED
+}
+
+enum PlanStatus {
+  ACTIVE
+  CLOSED
+  PAUSED
+}
+
+enum BillingFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+model User {
+  id          String    @id @default(cuid())
+  name        String?
+  email       String    @unique
+  password    String
+  role        UserRole  @default(STAFF)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  invoices      Invoice[]
+  subscriptions Subscription[]
+}
+
+model Product {
+  id          String    @id @default(cuid())
+  name        String
+  type        String?
+  salesPrice  Decimal   @db Decimal(10, 2)
+  costPrice   Decimal   @db Decimal(10, 2)
+  notes       String?
+  variants    Variant[]
+
+  lineItems   LineItem[]
+}
+
+model Variant {
+  id          String    @id @default(cuid())
+  name        String
+  priceAdjustment Decimal  @db Decimal(10, 2) // fixed amount added to base price
+
+  product      Product @relation(fields: [productId], references: [id])
+  productId    String
+}
+
+model Plan {
+  id                  String        @id @default(cuid())
+  name                String
+  billingFrequency    BillingFrequency
+  minimumQuantity     Int
+  dateAvailability    DateTime?
+  closeAutomatically  Boolean       @default(true)
+  canBeManuallyClosed Boolean       @default(false)
+  canBePaused         Boolean       @default(false)
+  canBeRenewed        Boolean       @default(false)
+  isActive            Boolean       @default(true)
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  subscriptions       Subscription[]
+}
+
+model Subscription {
+  id                  String        @id @default(uuid())
+  uniqueIdentifier    String        @unique
+  customer            User          @relation(fields: [customerId], references: [id])
+  customerId          String
+  plan                Plan          @relation(fields: [planId], references: [id])
+  planId              String
+  startDate           DateTime
+  expiryDate          DateTime?
+  status              String        @default("Draft")
+  paymentTerms        String
+  taxRate             Decimal       @db Decimal(5, 2) @default(0.00)
+  notes               String?
+
+  lineItems           LineItem[]
+  invoices            Invoice[]
+  payments            Payment[]
+}
+
+model LineItem {
+  id              String        @id @default(uuid())
+  subscription    Subscription  @relation(fields: [subscriptionId], references: [id])
+  subscriptionId    String
+  product           Product?      @relation(fields: [productId], references: [id])
+  productId         String?
+  quantity          Int
+  unitPrice         Decimal       @db Decimal(10, 2)
+  taxAmount         Decimal       @db Decimal(10, 2)
+  totalAmount       Decimal       @db Decimal(10, 2)
+  discountApplied   Decimal       @db Decimal(10, 2) @default(0.00)
+
+  @@ index([subscriptionId])
+}
+
+model Invoice {
+  id                  String        @id @default(uuid())
+  uniqueIdentifier    String        @unique
+  customer            User          @relation(fields: [customerId], references: [id])
+  customerId          String
+  subscription        Subscription? @relation(fields: [subscriptionId], references: [id])
+  subscriptionId      String?
+  status              InvoiceStatus @default("DRAFT")
+  issueDate           DateTime      @default(now())
+  dueDate             DateTime
+  subtotal            Decimal       @db Decimal(12, 2)
+  taxAmount           Decimal       @db Decimal(10, 2)
+  totalAmount         Decimal       @db Decimal(12, 2)
+  discountApplied     Decimal       @db Decimal(10, 2) @default(0.00)
+  notes               String?
+
+  payments            Payment[]
+
+  @@ index([customerId])
+  @@ index([status])
+}
+
+model Payment {
+  id              String        @id @default(uuid())
+  invoice         Invoice       @relation(fields: [invoiceId], references: [id])
+  invoiceId       String
+  amount          Decimal       @db Decimal(10, 2)
+  paymentMethod   String
+  paymentDate     DateTime      @default(now())
+  note            String?
+
+  @@ index([invoiceId])
+}
+
+model Discount {
+  id                  String        @id @default(uuid())
+  code                String        @unique
+  type                DiscountType
+  value               Decimal       @db Decimal(10, 2)
+  minPurchaseAmount   Decimal       @db Decimal(10, 2) @default(0.00)
+  minQuantity         Int           @default(0)
+  startDate           DateTime
+  endDate             DateTime
+  maxUsages           Int?
+  currentUsages       Int           @default(0)
+  status              DiscountStatus @default("ACTIVE")
+  applicableTo        String        // "global" or product IDs comma-separated
+  createdBy           User          @relation(fields: [createdById], references: [id])
+  createdById         String
+
+  subscriptions       Subscription[]
+}
