@@ -1,0 +1,30 @@
+{
+  "name": "recurengine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "^12.3.2",
+    "@nestjs/jwt": "^12.0.3",
+    "@nestjs/passport": "^12.0.0",
+    "@nestjs/platform-express": "^12.3.2",
+    "@nestjs/sequelize": "^12.0.0",
+    "@nestjs/typeorm": "^12.0.2",
+    "bcrypt": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  }
+}

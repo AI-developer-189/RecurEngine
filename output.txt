@@ -1,0 +1,52 @@
+app.module.ts(2,30): error TS2307: Cannot find module '@nestjs/config' or its corresponding type declarations.
+app.module.ts(3,28): error TS2307: Cannot find module './auth/auth.module' or its corresponding type declarations.
+app.module.ts(4,29): error TS2307: Cannot find module './users/users.module' or its corresponding type declarations.
+app.module.ts(5,32): error TS2307: Cannot find module './products/products.module' or its corresponding type declarations.
+app.module.ts(6,29): error TS2307: Cannot find module './plans/plans.module' or its corresponding type declarations.
+app.module.ts(7,37): error TS2307: Cannot find module './subscriptions/subscriptions.module' or its corresponding type declarations.
+app.module.ts(8,32): error TS2307: Cannot find module './invoices/invoices.module' or its corresponding type declarations.
+app.module.ts(9,32): error TS2307: Cannot find module './payments/payments.module' or its corresponding type declarations.
+app.module.ts(10,33): error TS2307: Cannot find module './discounts/discounts.module' or its corresponding type declarations.
+app.module.ts(11,31): error TS2307: Cannot find module './finance/finance.module' or its corresponding type declarations.
+src/auth/auth.module.ts(4,27): error TS2307: Cannot find module '@nestjs/jwt' or its corresponding type declarations.
+src/auth/auth.module.ts(13,15): error TS2591: Cannot find name 'process'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/auth/auth.service.ts(3,27): error TS2307: Cannot find module './dto/signin.dto' or its corresponding type declarations.
+src/auth/auth.service.ts(4,25): error TS2307: Cannot find module 'bcrypt' or its corresponding type declarations.
+src/auth/auth.service.ts(10,27): error TS2304: Cannot find name 'SignupDto'.
+src/auth/dto/signup.dto.ts(1,67): error TS2307: Cannot find module 'class-validator' or its corresponding type declarations.
+src/auth/dto/signup.dto.ts(5,3): error TS2564: Property 'email' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(8,3): error TS2564: Property 'name' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(17,3): error TS2564: Property 'password' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(20,3): error TS2564: Property 'confirmPassword' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(29,3): error TS2564: Property 'email' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(32,3): error TS2564: Property 'password' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(37,3): error TS2564: Property 'currentPassword' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/signup.dto.ts(46,3): error TS2564: Property 'newPassword' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/update-password.dto.ts(1,67): error TS2307: Cannot find module 'class-validator' or its corresponding type declarations.
+src/auth/dto/update-password.dto.ts(5,3): error TS2564: Property 'currentPassword' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/update-password.dto.ts(14,3): error TS2564: Property 'newPassword' has no initializer and is not definitely assigned in the constructor.
+src/auth/dto/update-password.dto.ts(18,3): error TS2564: Property 'confirmNewPassword' has no initializer and is not definitely assigned in the constructor.
+src/auth/jwt.strategy.ts(2,34): error TS2307: Cannot find module '@nestjs/passport' or its corresponding type declarations.
+src/auth/jwt.strategy.ts(3,42): error TS2307: Cannot find module 'passport-local' or its corresponding type declarations.
+src/auth/jwt.strategy.ts(5,27): error TS2307: Cannot find module './dto/signin.dto' or its corresponding type declarations.
+src/auth/roles.guard.ts(10,42): error TS2339: Property 'getAllAndOptional' does not exist on type 'Reflector'.
+src/auth/roles.guard.ts(26,41): error TS7006: Parameter 'role' implicitly has an 'any' type.
+src/discounts/discounts.service.ts(2,25): error TS2591: Cannot find name 'crypto'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/discounts/discounts.service.ts(3,40): error TS2307: Cannot find module '../prisma/model/discount.model' or its corresponding type declarations.
+src/finance/finance.service.ts(2,55): error TS2307: Cannot find module '../prisma/model' or its corresponding type declarations.
+src/invoices/invoices.service.ts(2,25): error TS2591: Cannot find name 'crypto'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/invoices/invoices.service.ts(3,34): error TS2307: Cannot find module '../prisma/model/invoice.model' or its corresponding type declarations.
+src/invoices/invoices.service.ts(30,8): error TS7006: Parameter 'sum' implicitly has an 'any' type.
+src/invoices/invoices.service.ts(30,13): error TS7006: Parameter 'item' implicitly has an 'any' type.
+src/plans/plans.controller.ts(47,4): error TS2304: Cannot find name 'Patch'.
+src/plans/plans.service.ts(2,25): error TS2591: Cannot find name 'crypto'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/plans/plans.service.ts(3,22): error TS2307: Cannot find module '../prisma/model/plan.model' or its corresponding type declarations.
+src/products/products.service.ts(2,25): error TS2591: Cannot find name 'crypto'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/products/products.service.ts(3,25): error TS2307: Cannot find module '../prisma/model/product.model' or its corresponding type declarations.
+src/subscriptions/subscriptions.service.ts(2,25): error TS2591: Cannot find name 'crypto'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/subscriptions/subscriptions.service.ts(3,40): error TS2307: Cannot find module '../prisma/model/subscription.model' or its corresponding type declarations.
+src/users/users.controller.ts(3,27): error TS2307: Cannot find module '@nestjs/passport' or its corresponding type declarations.
+src/users/users.module.ts(4,31): error TS2307: Cannot find module '@nestjs/typeorm' or its corresponding type declarations.
+src/users/users.module.ts(5,22): error TS2307: Cannot find module '../prisma/model/user.model' or its corresponding type declarations.
+src/users/users.service.ts(2,29): error TS2307: Cannot find module '@nestjs/sequelize' or its corresponding type declarations.
+src/users/users.service.ts(3,22): error TS2307: Cannot find module '../prisma/model/user.model' or its corresponding type declarations.
